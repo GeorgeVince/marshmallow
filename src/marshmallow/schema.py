@@ -1018,31 +1018,32 @@ class Schema(metaclass=SchemaMeta):
             if not field_obj.load_only:
                 dump_fields[field_name] = field_obj
 
-        dump_data_keys = [
-            field_obj.data_key if field_obj.data_key is not None else name
-            for name, field_obj in dump_fields.items()
-        ]
-        if len(dump_data_keys) != len(set(dump_data_keys)):
-            data_keys_duplicates = {
-                x for x in dump_data_keys if dump_data_keys.count(x) > 1
-            }
-            raise ValueError(
-                "The data_key argument for one or more fields collides "
-                "with another field's name or data_key argument. "
-                "Check the following field names and "
-                f"data_key arguments: {list(data_keys_duplicates)}"
-            )
-        load_attributes = [obj.attribute or name for name, obj in load_fields.items()]
-        if len(load_attributes) != len(set(load_attributes)):
-            attributes_duplicates = {
-                x for x in load_attributes if load_attributes.count(x) > 1
-            }
-            raise ValueError(
-                "The attribute argument for one or more fields collides "
-                "with another field's name or attribute argument. "
-                "Check the following field names and "
-                f"attribute arguments: {list(attributes_duplicates)}"
-            )
+        # dump_data_keys = [
+        #     field_obj.data_key if field_obj.data_key is not None else name
+        #     for name, field_obj in dump_fields.items()
+        # ]
+        # if len(dump_data_keys) != len(set(dump_data_keys)):
+        #     data_keys_duplicates = {
+        #         x for x in dump_data_keys if dump_data_keys.count(x) > 1
+        #     }
+        #     raise ValueError(
+        #         "The data_key argument for one or more fields collides "
+        #         "with another field's name or data_key argument. "
+        #         "Check the following field names and "
+        #         f"data_key arguments: {list(data_keys_duplicates)}"
+        #     )
+        # load_attributes = [obj.attribute or name for name, obj in load_fields.items()]
+        # if len(load_attributes) != len(set(load_attributes)):
+        #     attributes_duplicates = {
+        #         x for x in load_attributes if load_attributes.count(x) > 1
+        #     }
+        #     raise ValueError(
+        #         "The attribute argument for one or more fields collides "
+        #         "with another field's name or attribute argument. "
+        #         "Check the following field names and "
+        #         f"attribute arguments: {list(attributes_duplicates)}"
+        #     )
+        #
 
         self.fields = fields_dict
         self.dump_fields = dump_fields
